@@ -41,8 +41,8 @@ contract DiaryNFT is ERC721 {
     // Overrides ERC721's tokenURI function to return the IPFS hash for a given token ID.
     // View function, does not modify state, retuns string.
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        // Ensure the token exists, revert if it doesn't.
-        ownerOf(tokenId);
+        // Check if the token exists by calling ownerOf; it reverts if the token doesn't exist.
+        ownerOf(tokenId); // Reverts with "ERC721: invalid token ID" for nonexistent tokens.
         // Return the IPFS hash associated with the token ID.
         
         return _tokenURIs[tokenId];
