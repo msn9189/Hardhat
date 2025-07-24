@@ -1,18 +1,17 @@
 // Import Chai's expect function for assertion in tests.
 const { expect } = require("chai");
 // Import Hardhat's ethers library to interact with the Ethereum blockchain and contracts.
-const { ethers, loadFixture } = require("hardhat");
+const { ethers } = require("hardhat"); 
+
+const { loadFixture } = require("@nomicfoundation/hardhat-toolbox/network-helpers");
 
 // Describe block defines a test suite for the DiaryNFT contract.
 describe("DiaryNFT", function () {
   async function deployDiaryNFTFixture() {
     const [owner, addr1] = await ethers.getSigners();
 
-    const DiaryNFT = await ethers.getContractFactory("DiaryNFT");
-
-    const diaryNFT = await DiaryNFT.deploy();
-
-    await diaryNFT.deployed();
+     const diaryNFT = await ethers.deployContract("DiaryNFT");
+     await diaryNFT.waitForDeployment();
 
     return { diaryNFT, owner, addr1 };
   }
