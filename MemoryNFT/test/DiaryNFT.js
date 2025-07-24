@@ -61,7 +61,7 @@ describe("DiaryNFT", function() {
     it("Fails for nonexistent token URI", async function () {
 
         // Expect the tokenURI function to revert when called with a nonexistent token ID (999).
-        await expect(diaryNFT.tokenURI(999)).to.be.revertedWith("ERC721: URI query for nonexistent token");
+        await expect(diaryNFT.tokenURI(999)).to.be.revertedWith("ERC721: invalid token ID");
         
     });
     
