@@ -42,8 +42,9 @@ contract DiaryNFT is ERC721 {
     // View function, does not modify state, retuns string.
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         // Ensure the token exists, revert if it doesn't.
-        require(_exists(tokenId), "ERC721: URI query for nonexistent token");
+        ownerOf(tokenId);
         // Return the IPFS hash associated with the token ID.
+        
         return _tokenURIs[tokenId];
     }
 }
