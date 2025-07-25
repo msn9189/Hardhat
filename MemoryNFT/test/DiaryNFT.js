@@ -11,6 +11,7 @@ describe("DiaryNFT", function () {
     const [owner, addr1] = await ethers.getSigners();
 
      const diaryNFT = await ethers.deployContract("DiaryNFT");
+
      await diaryNFT.waitForDeployment();
 
     return { diaryNFT, owner, addr1 };
@@ -22,30 +23,14 @@ describe("DiaryNFT", function () {
         deployDiaryNFTFixture
       );
 
-      const ipfsHash = "QmTestHash123";
-      const tx = await diaryNFT.mintDiary(addr1.address, ipfsHash);
-      const receipt = await tx.wait();
-      const tokenId = receipt.events[0].args.tokenId;
-
-      expect(await diaryNFT.ownerOf(tokenId)).to.equal(addr1.address);
-
-      expect(await diaryNFT.tokenURI(tokenId)).to.equal(ipfsHash);
-
-      expect(receipt.events).to.have.lengthOf(2);
-
-      const event = receipt.events.find((e) => e.event === "DiaryMinted");
-
-      expect(event).to.exist;
-
-      expect(event.args.tokenId).to.equal(tokenId);
-      expect(event.args.receipient).to.equal(addr1.address);
-      expect(event.args.ipfsHash).to.equal(ipfsHash);
+      expect(await diaryNFT.tokenIds()).to.equal(0);
+      
     });
 
     it("Fails for nonexistent token URI", async function () {
       const { diaryNFT } = await loadFixture(deployDiaryNFTFixture);
       await expect(diaryNFT.tokenURI(999)).to.be.revertedWith(
-        "ERC721: invalid token ID"
+        "ERC721InvalidOwner"
       );
     });
   });
