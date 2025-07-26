@@ -28,27 +28,24 @@ describe("DiaryNFT", function () {
 
       const ipfsHash = "QmTestHash123";
 
-      const tx =await diaryNFT.mintDiary(addr1.address, ipfsHash);
+      const tx = await diaryNFT.mintDiary(addr1.address, ipfsHash);
       const Id = await diaryNFT.tokenIds();
       await expect(tx)
         .to.emit(diaryNFT, "DiaryMinted")
         .withArgs(Id, addr1.address, ipfsHash);
-      
-      
-  
+
       expect(Id).to.equal(1);
 
       expect(await diaryNFT.ownerOf(Id)).to.equal(addr1.address);
       expect(await diaryNFT.tokenURI(Id)).to.equal(ipfsHash);
-
-
-
     });
 
     it("Fails for nonexistent token URI", async function () {
       const { diaryNFT } = await loadFixture(deployDiaryNFTFixture);
-      await expect(diaryNFT.tokenURI(999)).to.be.revertedWith(
-        "ERC721InvalidOwner"
+
+      await expect(diaryNFT.tokenURI(999)).to.be.revertedWithCustomError(
+        diaryNFT,
+        "ERC721NonexistentToken"
       );
     });
   });
