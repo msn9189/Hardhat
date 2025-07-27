@@ -25,9 +25,11 @@ contract DiaryNFT is ERC721 {
 
     // Mints a new NFT to the recipient address with the provided IPFS hash as metadata.
     // Public function, anyone can call it. Returns the new token ID.
-    function mintDiary(address recipient, string memory ipfsHash) public returns (uint256){
+    function mintDiary(string memory ipfsHash) public returns (uint256){
         // Increment the token ID counter;
         tokenIds++;
+        // The address that call this function is the recipient of the minted NFT.
+        address recipient = msg.sender;
         // Get the current (newly incremented) token ID.
         uint256 newTokenId = tokenIds;
         // Mint the NFT to the recipient with the new token ID, ensuring safe transfer.
