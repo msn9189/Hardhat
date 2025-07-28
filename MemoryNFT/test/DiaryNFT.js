@@ -31,9 +31,9 @@ describe("DiaryNFT", function () {
       // Define a sample IPFS hash for testing.
       const ipfsHash = "QmTestHash123";
 
-      
-      const tx = await diaryNFT.mintDiary(addr1.address, ipfsHash);
+      const tx = await diaryNFT.connect(addr1).mintDiary(ipfsHash);
       const Id = await diaryNFT.tokenIds();
+      
       await expect(tx)
         .to.emit(diaryNFT, "DiaryMinted")
         .withArgs(Id, addr1.address, ipfsHash);
