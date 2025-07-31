@@ -9,9 +9,9 @@ async function main(memoryText) {
     // Define contract address and Infura credentials.
     const contractAddress = ""; // Replace with deployed address.
 
-    
-    const infuraProjectId = await vars.get("INFURA_PROJECT_ID"); // Replace with Infura Project ID.
-    const infuraProjectSecret = await vars.get("INFURA_PROJECT_SECRET"); // Replace with Infura secret.
+    // Get Infura credentials from Hardhat vars.
+    const infuraProjectId = await vars.get("INFURA_PROJECT_ID");
+    const infuraProjectSecret = await vars.get("INFURA_PROJECT_SECRET");
 
     // Upload metadata to IPFS and get hash.
     const ipfsHash = await uploadToIPFS(memoryText, infuraProjectId, infuraProjectSecret);
