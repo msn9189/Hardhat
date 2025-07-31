@@ -8,8 +8,10 @@ const { uploadToIPFS } = require("./uploadTpIPFS");
 async function main(memoryText) {
     // Define contract address and Infura credentials.
     const contractAddress = ""; // Replace with deployed address.
-    const infuraProjectId = ""; // Replace with Infura Project ID.
-    const infuraProjectSecret = ""; // Replace with Infura secret.
+
+    
+    const infuraProjectId = await vars.get("INFURA_PROJECT_ID"); // Replace with Infura Project ID.
+    const infuraProjectSecret = await vars.get("INFURA_PROJECT_SECRET"); // Replace with Infura secret.
 
     // Upload metadata to IPFS and get hash.
     const ipfsHash = await uploadToIPFS(memoryText, infuraProjectId, infuraProjectSecret);
