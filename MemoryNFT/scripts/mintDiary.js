@@ -1,5 +1,5 @@
 // Import Hardhat's ethers for contract interaction.
-const { ethers } = require("hardhat");
+const { ethers, vars } = require("hardhat");
 
 // Import uploadToIPFS function from the uploadToIPFS.js.
 const { uploadToIPFS } = require("./uploadTpIPFS");
