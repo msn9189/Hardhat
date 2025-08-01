@@ -9,12 +9,16 @@ async function main(memoryText) {
     // Define contract address and Infura credentials.
     const contractAddress = ""; // Replace with deployed address.
 
-    // Get Infura credentials from Hardhat vars.
-    const infuraProjectId = await vars.get("INFURA_PROJECT_ID");
-    const infuraProjectSecret = await vars.get("INFURA_PROJECT_SECRET");
+    // Get Pinata credentials with Hardhat vars.
+    const pinataApiKey = await vars.get("PINATA_API_KEY");
+    const pinataSecretApiKey = await vars.get("PINATA_API_SECRET");
 
     // Upload metadata to IPFS and get hash.
-    const ipfsHash = await uploadToIPFS(memoryText, infuraProjectId, infuraProjectSecret);
+    const ipfsHash = await uploadToIPFS(
+      memoryText,
+      pinataApiKey,
+      pinataSecretApiKey
+    );
     console.log("IPFS Hash:", ipfsHash);
 
     // Get contract factory and attach to deployed contract.
