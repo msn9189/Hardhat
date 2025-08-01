@@ -1,11 +1,11 @@
 // Import Infura SDK for IPFS uploads.
-const { Infura } = require("@infura/sdk");
+const { PinataSDK } = require("pinata-sdk");
 
-async function uploadToIPFS(memoryText, infuraProjectId, infuraProjectSecret) {
+async function uploadToIPFS(memoryText, pinataProjectId, pinataProjectSecret) {
     // Initialize Infura client with project credentials.
-    const infura = new Infura ({
-        projectId: infuraProjectId,
-        projectSecret: infuraProjectSecret,
+    const pinata = new PinataSDK({
+      pinataApiKey: pinataProjectId,
+      pinataSecretApiKey: pinataProjectSecret,
     });
 
     // Create metadata object for NFT.
@@ -17,8 +17,8 @@ async function uploadToIPFS(memoryText, infuraProjectId, infuraProjectSecret) {
     };
 
     // Upload metadata to IPFS and return CID.
-    const result = await infura.add(JSON.stringify(metadata));
-    return result.cid.toString();
+    const result = await pinata.pinJSONTOIPFS(metadata);
+    return result.IpfsHash;
 }
 
 // Export function for use in other scripts.
