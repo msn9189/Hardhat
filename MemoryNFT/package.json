@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@infura/sdk": "^2.4.3",
-    "@openzeppelin/contracts": "^5.4.0"
+    "@openzeppelin/contracts": "^5.4.0",
+    "pinata": "^2.4.9"
   }
 }
