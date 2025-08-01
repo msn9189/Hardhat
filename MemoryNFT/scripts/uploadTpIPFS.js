@@ -1,8 +1,8 @@
-// Import Infura SDK for IPFS uploads.
+// Import Pinata SDK for IPFS uploads.
 const { PinataSDK } = require("pinata-sdk");
 
 async function uploadToIPFS(memoryText, pinataProjectId, pinataProjectSecret) {
-    // Initialize Infura client with project credentials.
+    // Initialize Pinata client with project credentials.
     const pinata = new PinataSDK({
       pinataApiKey: pinataProjectId,
       pinataSecretApiKey: pinataProjectSecret,
