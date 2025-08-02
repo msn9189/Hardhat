@@ -7,7 +7,7 @@ const { uploadToIPFS } = require("./uploadTpIPFS");
 // main function accepts memoryText as input.
 async function main(memoryText) {
     // Define contract address and Infura credentials.
-    const contractAddress = ""; // Replace with deployed address.
+    const contractAddress = "0x8122b23629aC2639440dDd4Bda503fF0A9d0068F"; // Replace with deployed address.
 
     // Get Pinata credentials with Hardhat vars.
     const pinataApiKey = await vars.get("PINATA_API_KEY");
