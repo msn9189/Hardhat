@@ -2,7 +2,7 @@
 const { ethers, vars } = require("hardhat");
 
 // Import uploadToIPFS function from the uploadToIPFS.js.
-const { uploadToIPFS } = require("./uploadTpIPFS");
+const { uploadToIPFS } = require("./uploadToIPFS");
 
 // main function accepts memoryText as input.
 async function main(memoryText) {
