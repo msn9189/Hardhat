@@ -1,7 +1,7 @@
 // Import the buildModule function from Hardhat Ignition to define a deployment module.
 // A module is a reusable, declarative script that specifies how to deploy contracts
 // and manage their dependencies.
-const { buildModule } = require("@nomicfoundation/hardhat-ignition");
+const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
 
 // Export a Hardhat Ignition module named "DIaryNFTModule" for deploying the contract.
 // A callback function with a module builder (m) that defines the deployment logic.
