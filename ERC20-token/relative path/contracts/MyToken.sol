@@ -31,6 +31,7 @@ contract MyToken is ERC20, Ownable {
     }
 
     /// @notice Burn tokens from an address
+    /// @param from A address which tokens will be burned by th Owner
     /// @param amount Amount of tokens to burn (without decimals)
     function burn(address from, uint256 amount) public onlyOwner {
         _burn(from, amount * 10 ** decimals());
