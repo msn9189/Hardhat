@@ -17,7 +17,8 @@ contract MyToken is ERC20, Ownable {
         _mint(to, amount * 10 ** decimals());
     }
 
-    function burn(uint256 amount) public {
+    function burn(uint256 amount) public onlyOwner {
         _burn(msg.sender, amount * 10 ** decimals());
     }
+
 }
