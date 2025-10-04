@@ -18,6 +18,6 @@ contract MyToken is ERC20, Ownable {
     }
 
     function burn(uint256 amount) public {
-        _burn(msg.sender, amount);
+        _burn(msg.sender, amount * 10 ** decimals());
     }
 }
