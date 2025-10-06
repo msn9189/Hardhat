@@ -6,16 +6,16 @@ const { loadFixture } = require("@nomicfoundation/hardhat-toolbox/network-helper
 describe("MyToken", function () {
 
   async function deployMyTokenFixture() {
-    const MyToken = await ethers.deployContract("MyToken");
-    const [owner, alice, bob, carol] = await ethers.getsigners();
+    const [owner, alice, bob, carol] = await ethers.getSigners();
     const initialSupply = "1000";
-    await MyToken.waitForDeployment("MyToken", "MTK", initialSupply);
+    const MyToken = await ethers.deployContract("MyToken",["MyToken", "MTK", initialSupply]);
+    await MyToken.waitForDeployment();
     return { MyToken, owner, alice, bob, carol, initialSupply };
   }
 
   describe("Deployment", function () {
     it("Has correct name, symbol and decimals", async function () {
-      const MyToken = await loadFixture(
+      const { MyToken } = await loadFixture(
         deployMyTokenFixture
       );
 
@@ -23,6 +23,6 @@ describe("MyToken", function () {
       expect(await MyToken.symbol()).to.equal("MTK");
       expect(await MyToken.decimals()).to.equal(18);
 
-    })
-  })
-})
+    });
+  });
+});
