@@ -16,4 +16,10 @@ contract Counter {
     emit Incremented(msg.sender, count);
   }
 
+  function decrement() public {
+    require(count > 0, "Underflow");
+    count -= 1;
+    emit Decremented(msg.sender, count);
+  }
+
 }
