@@ -11,6 +11,9 @@ contract Counter {
     count = initial;
   }
 
-  
+  function increment() public {
+    count += 1;
+    emit Incremented(msg.sender, count);
+  }
 
 }
