@@ -2,18 +2,15 @@
 pragma solidity ^0.8.28;
 
 contract Counter {
-  uint public x;
+  uint256 public count;
 
-  event Increment(uint by);
+  event Incremented(address indexed by, uint256 newValue);
+  event Decremented(address indexed by, uint256 newValue);
 
-  function inc() public {
-    x++;
-    emit Increment(1);
+  constructor(uint256 initial) {
+    count = initial;
   }
 
-  function incBy(uint by) public {
-    require(by > 0, "incBy: increment should be positive");
-    x += by;
-    emit Increment(by);
-  }
+  
+
 }
