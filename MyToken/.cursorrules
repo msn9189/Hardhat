@@ -1,0 +1,13 @@
+## References
+
+- [Hardhat – Writing Solidity tests](https://hardhat.org/docs/learn-more/writing-solidity-tests)
+- [Hardhat – Deploying contracts (Ignition)](https://hardhat.org/docs/learn-more/deploying-contracts)
+- [Hardhat – Running Solidity tests](https://hardhat.org/docs/learn-more/writing-solidity-tests)
+- [Hardhat – Managing secrets](https://hardhat.org/docs/learn-more/deploying-contracts)
+- [Hardhat 3 – Cookbook](https://hardhat.org/docs/learn-more/cookbook)
+
+## Shortcuts
+
+- @Hardhat: Use the above Hardhat docs as the primary reference for answers, code examples, and commands. Prefer these pages when resolving questions about tests, deployments (Ignition), and configuration.
+
+
