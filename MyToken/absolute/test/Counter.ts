@@ -32,4 +32,9 @@ describe("Counter", function () {
     await expect(counter.Decrement()).to.emit(counter, "Decremented").withArgs(signer.address, 4n);
     expect(await counter.count()).to.equal(4n);
   });
+
+  it("reverts on decrement when the count is zero", async function () {
+    const {counter} = await loadFixture(deployZeroCounterFixture);
+    await expect(counter.Decrement()).to.be.revertedWith("Underflow");
+  });
 })
