@@ -15,5 +15,8 @@
     "hardhat": "^3.0.6",
     "mocha": "^11.7.4",
     "typescript": "~5.8.0"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-network-helpers": "^3.0.1"
   }
 }
