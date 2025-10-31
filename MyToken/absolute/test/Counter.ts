@@ -16,25 +16,31 @@ describe("Counter", function () {
     return { counter };
   }
 
+  describe("Deployment", function () {
   it("deploys with initial value", async function () {
-    const { counter} = await loadFixture(deployCounterFixture);
+    const { counter } = await loadFixture(deployCounterFixture);
     expect(await counter.count()).to.equal(5n);
   });
 
   it("increments and emits event", async function () {
     const { counter, signer } = await loadFixture(deployCounterFixture);
-    await expect(counter.Increment()).to.emit(counter, "Incremented").withArgs(signer.address, 6n);
+    await expect(counter.Increment())
+      .to.emit(counter, "Incremented")
+      .withArgs(signer.address, 6n);
     expect(await counter.count()).to.equal(6n);
   });
 
   it("decrements and emits event", async function () {
-    const {counter, signer} = await loadFixture(deployCounterFixture);
-    await expect(counter.Decrement()).to.emit(counter, "Decremented").withArgs(signer.address, 4n);
+    const { counter, signer } = await loadFixture(deployCounterFixture);
+    await expect(counter.Decrement())
+      .to.emit(counter, "Decremented")
+      .withArgs(signer.address, 4n);
     expect(await counter.count()).to.equal(4n);
   });
 
   it("reverts on decrement when the count is zero", async function () {
-    const {counter} = await loadFixture(deployZeroCounterFixture);
+    const { counter } = await loadFixture(deployZeroCounterFixture);
     await expect(counter.decrement()).to.be.revertedWith("Underflow");
   });
+})
 })
