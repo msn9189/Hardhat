@@ -1,16 +1,18 @@
 import { expect } from "chai";
-import hre from "hardhat";
+import { network } from "hardhat";
 
 describe("Counter", function () {
   it("deploys with initial value", async function () {
-    const counter = await hre.ethers.deployContract("Counter", [5n]);
+    const { ethers } = await network.connect();
+    const counter = await ethers.deployContract("Counter", [5n]);
     await counter.waitForDeployment();
     expect(await counter.count()).to.equal(5n);
   });
 
   it("increments and emits event", async function () {
-    const [signer] = await hre.ethers.getSigners();
-    const counter = await hre.ethers.deployContract("Counter", [5n]);
+    const { ethers } = await network.connect();
+    const [signer] = await ethers.getSigners();
+    const counter = await ethers.deployContract("Counter", [5n]);
     await counter.waitForDeployment();
 
     await expect(counter.increment())
@@ -21,8 +23,9 @@ describe("Counter", function () {
   });
 
   it("decrements and emits event", async function () {
-    const [signer] = await hre.ethers.getSigners();
-    const counter = await hre.ethers.deployContract("Counter", [6n]); // start at 6 to check 5
+    const { ethers } = await network.connect();
+    const [signer] = await ethers.getSigners();
+    const counter = await ethers.deployContract("Counter", [6n]); // start at 6 to check 5
     await counter.waitForDeployment();
 
     await expect(counter.decrement())
@@ -33,7 +36,8 @@ describe("Counter", function () {
   });
 
   it("reverts on decrement when count is zero", async function () {
-    const counter = await hre.ethers.deployContract("Counter", [0n]);
+    const { ethers } = await network.connect();
+    const counter = await ethers.deployContract("Counter", [0n]);
     await counter.waitForDeployment();
     await expect(counter.decrement()).to.be.revertedWith("Underflow");
   });
