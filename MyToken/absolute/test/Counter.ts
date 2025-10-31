@@ -35,6 +35,6 @@ describe("Counter", function () {
 
   it("reverts on decrement when the count is zero", async function () {
     const {counter} = await loadFixture(deployZeroCounterFixture);
-    await expect(counter.Decrement()).to.be.revertedWith("Underflow");
+    await expect(counter.decrement()).to.be.revertedWith("Underflow");
   });
 })
