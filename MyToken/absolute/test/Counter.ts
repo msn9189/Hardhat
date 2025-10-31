@@ -19,5 +19,11 @@ describe("Counter", function () {
   it("deploys with initial value", async function () {
     const { counter} = await loadFixture(deployCounterFixture);
     expect(await counter.count()).to.equal(5n);
-  })
+  });
+
+  it("increments and emits event", async function () {
+    const { counter, signer } = await loadFixture(deployCounterFixture);
+    await expect(counter.Increment()).to.emit(counter, "Incremented").withArgs(signer.address, 6n);
+    expect(await counter.count()).to.equal(6n);
+  });
 })
