@@ -9,4 +9,10 @@ describe("Counter", function () {
     await counter.waitForDeployment();
     return { counter, signer };
   }
+
+  async function deployZeroCounterFixture() {
+    const counter = await ethers.deployContract("Counter", [0n]);
+    await counter.waitForDeployment();
+    return { counter };
+  }
 })
