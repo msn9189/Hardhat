@@ -15,4 +15,9 @@ describe("Counter", function () {
     await counter.waitForDeployment();
     return { counter };
   }
+
+  it("deploys with initial value", async function () {
+    const { counter} = await loadFixture(deployCounterFixture);
+    expect(await counter.count()).to.equal(5n);
+  })
 })
