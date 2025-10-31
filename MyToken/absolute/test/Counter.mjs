@@ -1,46 +1,40 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
-const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
+import { expect } from "chai";
+import hre from "hardhat";
 
 describe("Counter", function () {
-  async function deployCounterFixture() {
-    const [signer] = await ethers.getSigners();
-    const counter = await ethers.deployContract("Counter", [5n]);
-    await counter.waitForDeployment();
-    return { counter, signer };
-  }
-
-  async function deployZeroCounterFixture() {
-    const counter = await ethers.deployContract("Counter", [0n]);
-    await counter.waitForDeployment();
-    return { counter };
-  }
-
-  describe("Deployment", function () {
   it("deploys with initial value", async function () {
-    const { counter } = await loadFixture(deployCounterFixture);
+    const counter = await hre.ethers.deployContract("Counter", [5n]);
+    await counter.waitForDeployment();
     expect(await counter.count()).to.equal(5n);
   });
 
   it("increments and emits event", async function () {
-    const { counter, signer } = await loadFixture(deployCounterFixture);
-    await expect(counter.Increment())
+    const [signer] = await hre.ethers.getSigners();
+    const counter = await hre.ethers.deployContract("Counter", [5n]);
+    await counter.waitForDeployment();
+
+    await expect(counter.increment())
       .to.emit(counter, "Incremented")
       .withArgs(signer.address, 6n);
+
     expect(await counter.count()).to.equal(6n);
   });
 
   it("decrements and emits event", async function () {
-    const { counter, signer } = await loadFixture(deployCounterFixture);
-    await expect(counter.Decrement())
+    const [signer] = await hre.ethers.getSigners();
+    const counter = await hre.ethers.deployContract("Counter", [6n]); // start at 6 to check 5
+    await counter.waitForDeployment();
+
+    await expect(counter.decrement())
       .to.emit(counter, "Decremented")
-      .withArgs(signer.address, 4n);
-    expect(await counter.count()).to.equal(4n);
+      .withArgs(signer.address, 5n);
+
+    expect(await counter.count()).to.equal(5n);
   });
 
-  it("reverts on decrement when the count is zero", async function () {
-    const { counter } = await loadFixture(deployZeroCounterFixture);
+  it("reverts on decrement when count is zero", async function () {
+    const counter = await hre.ethers.deployContract("Counter", [0n]);
+    await counter.waitForDeployment();
     await expect(counter.decrement()).to.be.revertedWith("Underflow");
   });
-})
-})
+});
