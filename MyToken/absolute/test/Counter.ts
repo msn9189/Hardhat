@@ -4,33 +4,30 @@ import { network } from "hardhat";
 const { ethers } = await network.connect();
 
 describe("Counter", function () {
-  it("Should emit the Increment event when calling the inc() function", async function () {
-    const counter = await ethers.deployContract("Counter");
+  it("deploys with initial value and increments/decrements with events", async function () {
+    const [signer] = await ethers.getSigners();
 
-    await expect(counter.inc()).to.emit(counter, "Increment").withArgs(1n);
+    const counter = await ethers.deployContract("Counter", [5n]);
+    await counter.waitForDeployment();
+
+    expect(await counter.count()).to.equal(5n);
+
+    await expect(counter.increment())
+      .to.emit(counter, "Incremented")
+      .withArgs(signer.address, 6n);
+
+    expect(await counter.count()).to.equal(6n);
+
+    await expect(counter.decrement())
+      .to.emit(counter, "Decremented")
+      .withArgs(signer.address, 5n);
+
+    expect(await counter.count()).to.equal(5n);
   });
 
-  it("The sum of the Increment events should match the current value", async function () {
-    const counter = await ethers.deployContract("Counter");
-    const deploymentBlockNumber = await ethers.provider.getBlockNumber();
-
-    // run a series of increments
-    for (let i = 1; i <= 10; i++) {
-      await counter.incBy(i);
-    }
-
-    const events = await counter.queryFilter(
-      counter.filters.Increment(),
-      deploymentBlockNumber,
-      "latest",
-    );
-
-    // check that the aggregated events match the current value
-    let total = 0n;
-    for (const event of events) {
-      total += event.args.by;
-    }
-
-    expect(await counter.x()).to.equal(total);
+  it("reverts on decrement when count is zero", async function () {
+    const counter = await ethers.deployContract("Counter", [0n]);
+    await counter.waitForDeployment();
+    await expect(counter.decrement()).to.be.revertedWith("Underflow");
   });
 });
