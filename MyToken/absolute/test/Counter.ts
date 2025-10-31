@@ -26,4 +26,10 @@ describe("Counter", function () {
     await expect(counter.Increment()).to.emit(counter, "Incremented").withArgs(signer.address, 6n);
     expect(await counter.count()).to.equal(6n);
   });
+
+  it("decrements and emits event", async function () {
+    const {counter, signer} = await loadFixture(deployCounterFixture);
+    await expect(counter.Decrement()).to.emit(counter, "Decremented").withArgs(signer.address, 4n);
+    expect(await counter.count()).to.equal(4n);
+  });
 })
