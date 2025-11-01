@@ -28,6 +28,11 @@ contract Counter {
    */
   event Decremented(address indexed by, uint256 newValue);
 
+  /**
+   * @notice Constructor that initializes the counter with a given value.
+   * @dev This function is called when the contract is deployed and cannot be called again.
+   * @param initial The initial value of the counter.
+   */
   constructor(uint256 initial) {
     count = initial;
   }
