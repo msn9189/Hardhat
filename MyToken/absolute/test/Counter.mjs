@@ -22,6 +22,7 @@ describe("Counter", function () {
   /**
    * @notice Tests the increment function of the counter contract.
    * @dev Increments the counter and checks if the count is set correctly.
+   * @test Starts at count = 5, increments to 6, verifies emitted event data and new count.
    */
   it("increments and emits event", async function () {
     const { ethers } = await network.connect();
