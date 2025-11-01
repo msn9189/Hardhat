@@ -37,6 +37,10 @@ contract Counter {
     count = initial;
   }
 
+  /**
+   * @notice Increment the counter by 1.
+   * @dev This function is public and can be called by any address.Emits an {Incremented} event after the count increases.
+   */
   function increment() public {
     count += 1;
     emit Incremented(msg.sender, count);
