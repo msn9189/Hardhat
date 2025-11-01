@@ -1,42 +1,45 @@
-import type { HardhatUserConfig } from "hardhat/config";
+require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-verify");
 
-import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
-import { configVariable } from "hardhat/config";
+const { vars } = require("hardhat/config");
 
-const config: HardhatUserConfig = {
-  plugins: [hardhatToolboxMochaEthersPlugin],
+// Environment variables (you can define them with `npx hardhat vars set NAME VALUE`)
+const INFURA_API_KEY = vars.get("INFURA_API_KEY");
+const PRIVATE_KEY = vars.get("PRIVATE_KEY");
+const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
+
+module.exports = {
   solidity: {
-    profiles: {
-      default: {
-        version: "0.8.28",
-      },
-      production: {
-        version: "0.8.28",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
-        },
-      },
+    version: "0.8.28",
+    settings: {
+      optimizer: { enabled: true, runs: 200 },
     },
   },
+
   networks: {
-    hardhatMainnet: {
-      type: "edr-simulated",
-      chainType: "l1",
+    // Base mainnet
+    base: {
+      url: `https://base-mainnet.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
-    hardhatOp: {
-      type: "edr-simulated",
-      chainType: "op",
+
+    // Base Sepolia testnet (for safe testing before mainnet)
+    baseSepolia: {
+      url: `https://base-sepolia.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
+
+    // Optional: Ethereum Sepolia testnet
     sepolia: {
-      type: "http",
-      chainType: "l1",
-      url: configVariable("SEPOLIA_RPC_URL"),
-      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+      url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
+    },
+  },
+
+  etherscan: {
+    apiKey: {
+      base: ETHERSCAN_API_KEY, // For Base mainnet verification
+      baseSepolia: ETHERSCAN_API_KEY, // For Base Sepolia verification
     },
   },
 };
-
-export default config;
