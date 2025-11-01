@@ -8,6 +8,10 @@ import { network } from "hardhat";
  * @dev Tests the deployment, increment, decrement, and error handling of the counter.
  */
 describe("Counter", function () {
+  /**
+   * @notice Tests the deployment of the counter contract with an initial value.
+   * @dev Deploys the counter contract with an initial value of 5 and checks if the count is set correctly.
+   */
   it("deploys with initial value", async function () {
     const { ethers } = await network.connect();
     const counter = await ethers.deployContract("Counter", [5n]);
