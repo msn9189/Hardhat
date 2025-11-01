@@ -55,6 +55,11 @@ describe("Counter", function () {
     expect(await counter.count()).to.equal(5n);
   });
 
+  /**
+   * @notice Tests the decrement function of the counter contract when the count is zero.
+   * @dev Decrements the counter and checks if the count is set correctly.
+   * @test Throws an error if the counter is already at 0.
+   */
   it("reverts on decrement when count is zero", async function () {
     const { ethers } = await network.connect();
     const counter = await ethers.deployContract("Counter", [0n]);
