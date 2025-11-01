@@ -37,6 +37,11 @@ describe("Counter", function () {
     expect(await counter.count()).to.equal(6n);
   });
 
+  /**
+   * @notice Tests the decrement function of the counter contract.
+   * @dev Decrements the counter and checks if the count is set correctly.
+   * @test Starts at count = 6, decrements to 5, verifies emitted event data and new count.
+   */
   it("decrements and emits event", async function () {
     const { ethers } = await network.connect();
     const [signer] = await ethers.getSigners();
