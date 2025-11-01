@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-
+/**
+ * @title Counter Contract
+ * @author nazii.eth
+ * @notice This contract allows users to increment and decrement a simple counter.
+ * @dev Demonstrates basic Solidity concepts: state variables, events, and functions.
+ */
 contract Counter {
   uint256 public count;
 
