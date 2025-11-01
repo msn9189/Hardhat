@@ -20,6 +20,12 @@ contract Counter {
    * @param newValue TThe new count value after incrementing.
    */
   event Incremented(address indexed by, uint256 newValue);
+
+  /**
+   * @notice Event emitted when the counter is decremented.
+   * @param by The address of the caller who decremented the counter.
+   * @param newValue The new count value after decrementing.
+   */
   event Decremented(address indexed by, uint256 newValue);
 
   constructor(uint256 initial) {
