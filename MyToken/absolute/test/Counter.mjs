@@ -1,6 +1,12 @@
 import { expect } from "chai";
 import { network } from "hardhat";
 
+/**
+ * @title Counter Test
+ * @author nazii.eth
+ * @notice This test suite verifies the functionality of the Counter contract.
+ * @dev Tests the deployment, increment, decrement, and error handling of the counter.
+ */
 describe("Counter", function () {
   it("deploys with initial value", async function () {
     const { ethers } = await network.connect();
