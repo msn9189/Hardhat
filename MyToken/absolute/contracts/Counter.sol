@@ -14,6 +14,11 @@ contract Counter {
    */
   uint256 public count;
 
+  /**
+   * @notice Event emitted when the counter is incremented.
+   * @param by The address of the caller who incremented the counter.
+   * @param newValue TThe new count value after incrementing.
+   */
   event Incremented(address indexed by, uint256 newValue);
   event Decremented(address indexed by, uint256 newValue);
 
