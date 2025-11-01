@@ -1,6 +1,6 @@
-import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
+const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
 
-export default buildModule("CounterModule", (m) => {
+module.exports = buildModule("CounterModule", (m) => {
   const counter = m.contract("Counter", [1n]);
   return { counter };
 });
