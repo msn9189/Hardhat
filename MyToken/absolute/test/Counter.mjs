@@ -19,6 +19,10 @@ describe("Counter", function () {
     expect(await counter.count()).to.equal(5n);
   });
 
+  /**
+   * @notice Tests the increment function of the counter contract.
+   * @dev Increments the counter and checks if the count is set correctly.
+   */
   it("increments and emits event", async function () {
     const { ethers } = await network.connect();
     const [signer] = await ethers.getSigners();
