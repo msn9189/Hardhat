@@ -46,6 +46,11 @@ contract Counter {
     emit Incremented(msg.sender, count);
   }
 
+  /**
+   * @notice Decrement the counter by 1.
+   * @dev This function is public and can be called by any address.Emits a {Decremented} event after the count decreases.
+   * @notice If the counter is already at 0.Throws an error if the counter is already at 0.
+   */
   function decrement() public {
     require(count > 0, "Underflow");
     count -= 1;
