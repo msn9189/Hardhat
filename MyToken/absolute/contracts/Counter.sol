@@ -8,6 +8,10 @@ pragma solidity ^0.8.28;
  * @dev Demonstrates basic Solidity concepts: state variables, events, and functions.
  */
 contract Counter {
+  /**
+   * @notice Store the current count value.
+   * @dev This variable is publicly accessible and automatically generates a getter function.
+   */
   uint256 public count;
 
   event Incremented(address indexed by, uint256 newValue);
