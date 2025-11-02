@@ -36,4 +36,14 @@ describe("SimpleBank", function () {
     const [owner, user] = await ethers.getSigners();
     await expect(bank.connect(user).getTotalBankBalance()).to.be.revertedWith("Not the owner");
   });
+
+   it("should have correct total balance in contract", async function () {
+     const [owner, user1, user2] = await ethers.getSigners();
+
+     await bank.connect(user1).deposit({ value: ethers.parseEther("1") });
+     await bank.connect(user2).deposit({ value: ethers.parseEther("3") });
+
+     const total = await bank.connect(owner).getTotalBankBalance();
+     expect(total).to.equal(ethers.parseEther("4"));
+   });
 });
