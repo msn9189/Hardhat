@@ -4,17 +4,9 @@ import { network } from "hardhat";
 const {ethers} = await network.connect();
 
 describe("SimpleBank", function () {
-  let bank;
-  let owner;
 
-  before(async function () {
-    const [deployer] = await ethers.getSigners();
-    owner = deployer;
+  it("Should allow deposits", async function () {
+    await bank.deposit({value: ethers.parseEther("1")});
+    const balance = await bank.getBalance
   });
-
-  beforeEach(async function() {
-    bank = await ethers.deployContract("SimpleBank");
-    await bank.waitForDeployment();
-  });
-
 })
