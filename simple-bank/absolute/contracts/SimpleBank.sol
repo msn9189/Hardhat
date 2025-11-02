@@ -49,6 +49,11 @@ contract SimpleBank {
     payable(msg.sender).transfer(amount);
   }
 
+  /**
+   * @dev Function to get the balance of the user.
+   * @notice The function allows users to get the balance of their account.
+   * @return The balance of the user.
+   */
   function getBalance() external view returns (uint) {
     return balances[msg.sender];
   }
