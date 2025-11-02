@@ -31,4 +31,9 @@ describe("SimpleBank", function () {
     const remaining = await bank.connect(user1).getBalance();
     expect(remaining).to.equal(depositAmount-withdrawAmount);
   });
+
+  it("should revert if non-owner tries to get total bank balance", async function () {
+    const [owner, user] = await ethers.getSigners();
+    await expect(bank.connect(user).getTotalBankBalance()).to.be.revertedWith("Not the owner");
+  });
 )};
