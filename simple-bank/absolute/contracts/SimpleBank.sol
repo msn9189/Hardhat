@@ -13,6 +13,10 @@ contract SimpleBank {
   mapping(address => uint) private balances;
   address public owner;
 
+/**
+ * @dev Constructor to set the owner of the contract.
+ * @notice The owner of the contract is the account that deployed the contract.
+ */
   constructor() {
     owner = msg.sender;
   }
