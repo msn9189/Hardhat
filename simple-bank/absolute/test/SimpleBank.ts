@@ -16,7 +16,7 @@ describe("SimpleBank", function () {
   it("Should allow deposits", async function () {
     const [owner, user1] = await ethers.getSigners();
     await bank.connect(user1).deposit({ value: ethers.parseEther("1") });
-    const balance = await bank.getBalance();
+    const balance = await bank.connect(user1).getBalance();
     expect(balance).to.equal(ethers.parseEther("1"));
   });
 
