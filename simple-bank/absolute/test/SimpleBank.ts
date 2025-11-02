@@ -4,6 +4,10 @@ import { network } from "hardhat";
 /// @notice Establish connection to Hardhat network and get ethers instance
 const {ethers} = await network.connect();
 
+/**
+  @title Test Suite for SimpleBank Smart Contract
+  @notice This test file validates deposit, withdrawal, ownership restrictions, and total balance logic
+ */
 describe("SimpleBank", function () {
 
   let bank: any;
