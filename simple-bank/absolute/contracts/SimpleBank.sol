@@ -28,6 +28,11 @@ contract SimpleBank {
     require(msg.sender == owner, "Only owner can call this function");
     _;
   }
+
+  /**
+   * @dev Function to deposit funds into the bank.
+   * @notice The function allows users to deposit funds into the bank.
+   */
   function deposit() external payable {
     require(msg.value > 0, "Amount must be greater than 0");
     balances[msg.sender] += msg.value;
