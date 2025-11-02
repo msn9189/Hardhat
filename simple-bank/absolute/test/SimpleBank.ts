@@ -1,10 +1,13 @@
 import { expect } from "chai";
-import { network } from "hardhat";
+import hre from "hardhat";
 
 describe("SimpleBank", function () {
-  let ethers;
   let bank;
   let owner;
-  
+
+  before(async function () {
+    const [deployer] = await hre.ethers.getSigners();
+    owner = deployer;
+  });
 
 })
