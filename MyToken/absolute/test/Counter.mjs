@@ -1,6 +1,8 @@
 import { expect } from "chai";
 import { network } from "hardhat";
 
+const { ethers } = await network.connect();
+
 /**
  * @title Counter Test
  * @author nazii.eth
@@ -13,7 +15,6 @@ describe("Counter", function () {
    * @dev Deploys the counter contract with an initial value of 5 and checks if the count is set correctly.
    */
   it("deploys with initial value", async function () {
-    const { ethers } = await network.connect();
     const counter = await ethers.deployContract("Counter", [5n]);
     await counter.waitForDeployment();
     expect(await counter.count()).to.equal(5n);
@@ -25,7 +26,6 @@ describe("Counter", function () {
    * @test Starts at count = 5, increments to 6, verifies emitted event data and new count.
    */
   it("increments and emits event", async function () {
-    const { ethers } = await network.connect();
     const [signer] = await ethers.getSigners();
     const counter = await ethers.deployContract("Counter", [5n]);
     await counter.waitForDeployment();
@@ -43,7 +43,6 @@ describe("Counter", function () {
    * @test Starts at count = 6, decrements to 5, verifies emitted event data and new count.
    */
   it("decrements and emits event", async function () {
-    const { ethers } = await network.connect();
     const [signer] = await ethers.getSigners();
     const counter = await ethers.deployContract("Counter", [6n]); // start at 6 to check 5
     await counter.waitForDeployment();
@@ -61,7 +60,6 @@ describe("Counter", function () {
    * @test Throws an error if the counter is already at 0.
    */
   it("reverts on decrement when count is zero", async function () {
-    const { ethers } = await network.connect();
     const counter = await ethers.deployContract("Counter", [0n]);
     await counter.waitForDeployment();
     await expect(counter.decrement()).to.be.revertedWith("Underflow");
