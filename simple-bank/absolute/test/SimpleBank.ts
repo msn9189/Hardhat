@@ -26,6 +26,7 @@ describe("SimpleBank", function () {
     expect(balance).to.equal(ethers.parseEther("1"));
   });
 
+  /// @notice Test if users can withdraw a portion of their deposited Ether correctly
   it("Should allow user to withdraw deposited value", async function () {
     const [owner, user1] = await ethers.getSigners();
     const depositAmount = ethers.parseEther("2");
@@ -37,7 +38,10 @@ describe("SimpleBank", function () {
     const remaining = await bank.connect(user1).getBalance();
     expect(remaining).to.equal(depositAmount - withdrawAmount);
   });
-
+  /**
+   *  @notice Test that only the owner can access the total bank balance
+   *  @dev This test ensures access control is enforced properly
+   */
   it("should revert if non-owner tries to get total bank balance", async function () {
     const [owner, user] = await ethers.getSigners();
     await expect(bank.connect(user).getTotalBankBalance()).to.be.revertedWith(
