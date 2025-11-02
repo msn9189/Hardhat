@@ -7,6 +7,9 @@ pragma solidity ^0.8.28;
  * @notice This contract is a simple bank that allows users to deposit and withdraw funds.
  */
 contract SimpleBank {
+  /**
+   * @dev Mapping to store the balances of the users.
+   */
   mapping(address => uint) private balances;
   address public owner;
 
