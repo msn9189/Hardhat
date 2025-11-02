@@ -21,6 +21,9 @@ contract SimpleBank {
     owner = msg.sender;
   }
 
+  /**
+   * @dev Modifier to only allow the owner to call a function.
+   */
   modifier onlyOwner() {
     require(msg.sender == owner, "Only owner can call this function");
     _;
