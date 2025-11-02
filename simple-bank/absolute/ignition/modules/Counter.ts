@@ -1,9 +1,7 @@
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-export default buildModule("CounterModule", (m) => {
-  const counter = m.contract("Counter");
+export default buildModule("SimpleBankModule", (m) => {
+  const SimpleBank = m.contract("ُSimpleBank");
 
-  m.call(counter, "incBy", [5n]);
-
-  return { counter };
+  return { SimpleBank };
 });
