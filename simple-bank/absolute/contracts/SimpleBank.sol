@@ -38,6 +38,11 @@ contract SimpleBank {
     balances[msg.sender] += msg.value;
   }
 
+  /**
+   * @dev Function to withdraw funds from the bank.
+   * @notice The function allows users to withdraw funds from the bank.
+   * @param amount The amount of funds to withdraw.
+   */
   function withdraw(uint amount) external {
     require(balances[msg.sender] >= amount, "Insufficient balance");
     balances[msg.sender] -= amount;
