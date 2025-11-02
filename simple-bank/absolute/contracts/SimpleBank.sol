@@ -58,6 +58,11 @@ contract SimpleBank {
     return balances[msg.sender];
   }
 
+  /**
+   * @dev Function to get the total balance of the bank.
+   * @notice The function allows the owner to get the total balance of the bank.
+   * @return The total balance of the bank.
+   */
   function getTotalBankBalance() external view onlyOwner returns (uint256) {
     return address(this).balance;
   }
