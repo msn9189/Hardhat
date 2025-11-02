@@ -34,7 +34,9 @@ describe("SimpleBank", function () {
 
   it("should revert if non-owner tries to get total bank balance", async function () {
     const [owner, user] = await ethers.getSigners();
-    await expect(bank.connect(user).getTotalBankBalance()).to.be.revertedWith("Not the owner");
+    await expect(bank.connect(user).getTotalBankBalance()).to.be.revertedWith(
+      "Only owner can call this function"
+    );
   });
 
    it("should have correct total balance in contract", async function () {
