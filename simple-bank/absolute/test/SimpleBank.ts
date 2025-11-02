@@ -19,4 +19,16 @@ describe("SimpleBank", function () {
     const balance = await bank.getBalance();
     expect(balance).to.equal(ethers.parseEther("1"));
   });
+
+  it("Should allow user to withdraw deposited value", async function(){
+    const [owner, user1] = await ethers.getSigners();
+    const depositAmount = ethers.parseEther("2");
+    await bank.connect(user1).deposit({value: depositAmount});
+
+    const withdrawAmount = ethers.parseEther("1");
+    await bank.connect(user1).withdraw(withdrawAmount);
+
+    const remaining = await bank.connect(user1).getBalance();
+    expect(remaining).to.equal(depositAmount-withdrawAmount);
+  });
 )};
