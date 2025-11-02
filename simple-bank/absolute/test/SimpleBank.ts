@@ -49,6 +49,7 @@ describe("SimpleBank", function () {
     );
   });
 
+  /// @notice Test that the total balance of the contract is the sum of all user deposits
   it("should have correct total balance in contract", async function () {
     const [owner, user1, user2] = await ethers.getSigners();
 
