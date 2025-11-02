@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-
+/**
+ * @title SimpleBank
+ * @author nazii.eth
+ * @notice This contract is a simple bank that allows users to deposit and withdraw funds.
+ */
 contract SimpleBank {
   mapping(address => uint) private balances;
   address public owner;
