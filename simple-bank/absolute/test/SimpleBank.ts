@@ -8,9 +8,11 @@ describe("SimpleBank", function () {
   let bank: any;
 
   beforeEach(async function () {
+    const[owner, user] = await ethers.getSigners();
     const Bank = await ethers.getContractFactory("SimpleBank");
     bank = await Bank.deploy();
     await bank.waitForDeployment && await bank.waitForDeployment();
+    return {owner, user, bank};
   });
 
   it("Should allow deposits", async function () {
