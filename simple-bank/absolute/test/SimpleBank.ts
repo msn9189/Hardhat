@@ -8,11 +8,11 @@ describe("SimpleBank", function () {
   let bank: any;
 
   beforeEach(async function () {
-    const[owner, user] = await ethers.getSigners();
+    const[owner, user1, user2] = await ethers.getSigners();
     const Bank = await ethers.getContractFactory("SimpleBank");
     bank = await Bank.deploy();
     await bank.waitForDeployment && await bank.waitForDeployment();
-    return {owner, user, bank};
+    return {owner, user1, user2, bank};
   });
 
   it("Should allow deposits", async function () {
@@ -20,3 +20,4 @@ describe("SimpleBank", function () {
     const balance = await bank.getBalance();
     expect(balance).to.equal(ethers.parseEther("1"));
   });
+)};
