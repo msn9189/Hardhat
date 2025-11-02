@@ -1,7 +1,7 @@
 {
   "name": "absolute",
   "version": "1.0.0",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "@nomicfoundation/hardhat-ignition": "^3.0.3",
     "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.0",
