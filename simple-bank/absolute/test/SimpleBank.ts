@@ -36,4 +36,4 @@ describe("SimpleBank", function () {
     const [owner, user] = await ethers.getSigners();
     await expect(bank.connect(user).getTotalBankBalance()).to.be.revertedWith("Not the owner");
   });
-)};
+});
