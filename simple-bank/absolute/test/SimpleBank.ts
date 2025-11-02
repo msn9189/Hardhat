@@ -12,4 +12,9 @@ describe("SimpleBank", function () {
     owner = deployer;
   });
 
+  beforeEach(async function() {
+    bank = await ethers.deployContract("SimpleBank");
+    await bank.waitForDeployment();
+  });
+
 })
