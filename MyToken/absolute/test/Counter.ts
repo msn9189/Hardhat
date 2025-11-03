@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { network } from "hardhat";
 
 /// @notice Establish connection to Hardhat network and get ethers instance
-const { ethers } = await network.connect();
+const {ethers} = await network.connect();
 
 /**
  * @title Counter Test
