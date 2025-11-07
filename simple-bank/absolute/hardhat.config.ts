@@ -4,6 +4,8 @@ import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mo
 import { configVariable } from "hardhat/config";
 import hardhatVerify from "@nomicfoundation/hardhat-verify";
 
+const api = configVariable("ETHERSCAN_API_KEY");
+
 const config: HardhatUserConfig = {
   plugins: [hardhatToolboxMochaEthersPlugin, hardhatVerify],
   solidity: {
@@ -52,24 +54,22 @@ const config: HardhatUserConfig = {
   },
   verify: {
     etherscan: {
-      apiKey: configVariable("ETHERSCAN_API_KEY"),
+      apiKey: api,
     },
   },
-//   chainDescriptors: {
-//     // Example chain
-//     8453: {
-//       name: "BaseMainnet",
-//       blockExplorers: {
-//         etherscan: {
-//           name: "BaseScan",
-//           url: "https://basescan.org/",
-//           apiUrl: `https://basescan.org/${ETHERSCAN_API_KEY}`,
-//         },
-//       },
-//   },
-// },
-  
-  
+  chainDescriptors: {
+    // Example chain
+    8453: {
+      name: "BaseMainnet",
+      blockExplorers: {
+        etherscan: {
+          name: "BaseScan",
+          url: "https://basescan.org/",
+          apiUrl: `https://api.etherscan.io/v2/api?chainid=8453&action=balance&apikey=${api}`,
+        },
+      },
+    },
+  },
 };
 
 export default config;
