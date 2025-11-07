@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-ae96fba9ad5a732d3757542ad4ce102f4b6e2eb6",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/SimpleBank.sol": "project/contracts/SimpleBank.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/SimpleBank.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.28;\n\n/**\n * @title SimpleBank\n * @author nazii.eth\n * @notice This contract is a simple bank that allows users to deposit and withdraw funds.\n */\ncontract SimpleBank {\n  /**\n   * @dev Mapping to store the balances of the users.\n   */\n  mapping(address => uint) private balances;\n  address public owner;\n\n/**\n * @dev Constructor to set the owner of the contract.\n * @notice The owner of the contract is the account that deployed the contract.\n */\n  constructor() {\n    owner = msg.sender;\n  }\n\n  /**\n   * @dev Modifier to only allow the owner to call a function.\n   */\n  modifier onlyOwner() {\n    require(msg.sender == owner, \"Only owner can call this function\");\n    _;\n  }\n\n  /**\n   * @dev Function to deposit funds into the bank.\n   * @notice The function allows users to deposit funds into the bank.\n   */\n  function deposit() external payable {\n    require(msg.value > 0, \"Amount must be greater than 0\");\n    balances[msg.sender] += msg.value;\n  }\n\n  /**\n   * @dev Function to withdraw funds from the bank.\n   * @notice The function allows users to withdraw funds from the bank.\n   * @param amount The amount of funds to withdraw.\n   */\n  function withdraw(uint amount) external {\n    require(balances[msg.sender] >= amount, \"Insufficient balance\");\n    balances[msg.sender] -= amount;\n    payable(msg.sender).transfer(amount);\n  }\n\n  /**\n   * @dev Function to get the balance of the user.\n   * @notice The function allows users to get the balance of their account.\n   * @return The balance of the user.\n   */\n  function getBalance() external view returns (uint) {\n    return balances[msg.sender];\n  }\n\n  /**\n   * @dev Function to get the total balance of the bank.\n   * @notice The function allows the owner to get the total balance of the bank.\n   * @return The total balance of the bank.\n   */\n  function getTotalBankBalance() external view onlyOwner returns (uint256) {\n    return address(this).balance;\n  }\n}"
+      }
+    }
+  }
+}
