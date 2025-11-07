@@ -55,9 +55,25 @@ const config: HardhatUserConfig = {
       apiKey: "ETHERSCAN_API_KEY",
     },
   },
+  chainDescriptors: {
+    // Example chain
+    8453: {
+      name: "BaseMainnet",
+      blockExplorers: {
+        etherscan: {
+          name: "BaseScan",
+          url: "https://basescan.org/",
+          apiUrl: `https://basescan.org/${ETHERSCAN_API_KEY}`,
+        },
+      },
+  },
+},
+  
+  
 };
 
 export default config;
+
 
 
     
