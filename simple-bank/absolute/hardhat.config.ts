@@ -36,7 +36,7 @@ const config: HardhatUserConfig = {
       url: configVariable("SEPOLIA_RPC_URL"),
       accounts: [configVariable("PRIVATE_KEY")],
     },
-    baseSepolia: {
+    base_sepolia: {
       type: "http",
       chainType: "op",
       url: configVariable("Base_SEPOLIA_RPC_URL"),
