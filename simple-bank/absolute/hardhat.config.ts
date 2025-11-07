@@ -42,15 +42,16 @@ const config: HardhatUserConfig = {
       url: configVariable("Base_SEPOLIA_RPC_URL"),
       accounts: [configVariable("PRIVATE_KEY")],
     },
+    base: {
+      type: "http",
+      chainType: "op",
+      url: configVariable("Base_MAINNET_RPC_URL"),
+      accounts: [configVariable("PRIVATE_KEY")],
+    },
   },
 };
 
 export default config;
 
 
-    // base: {
-    //   type: "http",
-    //   chainType: "op",
-    //   url: configVariable("Base_MAINNET_RPC_URL"),
-    //   accounts: [configVariable("PRIVATE_KEY")],
-    // },
+    
