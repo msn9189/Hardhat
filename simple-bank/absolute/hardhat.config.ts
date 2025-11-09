@@ -60,7 +60,7 @@ const config: HardhatUserConfig = {
           network: "base",
           chainId: 8453,
           urls: {
-            apiURL: "https://api.basescan.org/api",
+            apiURL: "https://api.basescan.org/v2/api",
             browserURL: "https://basescan.org",
           },
         },
@@ -68,7 +68,7 @@ const config: HardhatUserConfig = {
           network: "base_sepolia",
           chainId: 84532,
           urls: {
-            apiURL: "https://api-sepolia.basescan.org/api",
+            apiURL: "https://api-sepolia.basescan.org/v2/api",
             browserURL: "https://sepolia.basescan.org",
           },
         },
@@ -78,7 +78,3 @@ const config: HardhatUserConfig = {
 };
 
 export default config;
-
-
-
-    
