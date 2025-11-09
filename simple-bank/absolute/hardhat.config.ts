@@ -55,19 +55,24 @@ const config: HardhatUserConfig = {
   verify: {
     etherscan: {
       apiKey: api,
-    },
-  },
-  chainDescriptors: {
-    // Example chain
-    8453: {
-      name: "BaseMainnet",
-      blockExplorers: {
-        etherscan: {
-          name: "BaseScan",
-          url: "https://basescan.org/",
-          apiUrl: `https://api.etherscan.io/v2/api?chainid=8453&action=balance&apikey=${api}`,
+      customChains: [
+        {
+          network: "base",
+          chainId: 8453,
+          urls: {
+            apiURL: "https://api.basescan.org/api",
+            browserURL: "https://basescan.org",
+          },
         },
-      },
+        {
+          network: "base_sepolia",
+          chainId: 84532,
+          urls: {
+            apiURL: "https://api-sepolia.basescan.org/api",
+            browserURL: "https://sepolia.basescan.org",
+          },
+        },
+      ],
     },
   },
 };
