@@ -52,26 +52,6 @@ const config: HardhatUserConfig = {
       accounts: [configVariable("PRIVATE_KEY")],
     },
   },
-  chainDescriptors: {
-    "8453": {
-      name: "Base",
-      blockExplorers: {
-        etherscan: {
-          url: "https://basescan.org",
-          apiUrl: "https://api.basescan.org/v2/api",
-        },
-      },
-    },
-    "84532": {
-      name: "Base Sepolia",
-      blockExplorers: {
-        etherscan: {
-          url: "https://sepolia.basescan.org",
-          apiUrl: "https://api-sepolia.basescan.org/v2/api",
-        },
-      },
-    },
-  },
   verify: {
     etherscan: {
       apiKey: api,
