@@ -17,6 +17,18 @@ contract NFTMarketplace is ReentrancyGaurd {
     event NFTBought(address indexed nftContract, uint256 indexed tokenId, address buyer, uint256 price);
     event NFTCancelled(address indexed nftContract, uint256 indexed tokenId, address seller);
 
-    
+    function listNFT(address nftContract, uint256 tokenId, uint256 price) external {
+        require(price > 0, "Price must be greater than 0");
+        IERC721 nft = IERC721(nftContract);
+        require(nft.ownerOf(tokenId) == msg.sender, "Not owner");
+        require(
+            nft.getApproved(tokenId) == address(this) ||
+            nft.isApprovedForAll(msg.sender, address(this)),
+            "Marketplace not approved"
+        );
+
+        listings[nftContract][tokenId] = Listing(msg.sender, price);
+        emit NFTListed(nftContract, tokenId, msg.sender, price);
+    }
 
 }   
