@@ -4,7 +4,7 @@ pragma solidity ^0.8.28;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract NFTMarketplace is ReentrancyGaurd {
+contract NFTMarketplace is ReentrancyGuard {
 
     struct Listing {
         address seller;
