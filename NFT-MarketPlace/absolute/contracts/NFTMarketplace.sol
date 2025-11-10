@@ -38,7 +38,7 @@ contract NFTMarketplace is ReentrancyGuard {
 
         delete listings[nftContract][tokenId];
 
-        IERC721(nftContract).transformFrom(listedItem.seller, msg.sender, tokenId);
+        IERC721(nftContract).transferFrom(listedItem.seller, msg.sender, tokenId);
 
         (bool success, ) = payable(listedItem.seller).call{value: msg.value}("");
         require(success, "ETH transfer failed");
