@@ -31,4 +31,20 @@ contract NFTMarketplace is ReentrancyGaurd {
         emit NFTListed(nftContract, tokenId, msg.sender, price);
     }
 
+    function buyNFT(address nftContract, uint256 tokenId) external payable nonReentrant {
+        Listing memory listedItem = listings[nftContract][tokenId];
+        require(listedItem.price > 0, "NFT not for sale");
+        require(msg.value >= listedItem.price, "Not enough ETH sent");
+
+        delete listings[nftContract][tokenId];
+
+        IERC721(nftContract).transformFrom(listedItem.seller, msg.sender, tokenId);
+
+        (bool success, ) = payable(listedItem.seller).call{value: msg.value}("");
+        require(success, "ETH transfer failed");
+
+        emit NFTBought(nftContract, tokenId, msg.sender, listedItem.price);
+    }
+
+
 }   
