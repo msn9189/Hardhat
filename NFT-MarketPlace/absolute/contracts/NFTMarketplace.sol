@@ -4,6 +4,12 @@ pragma solidity ^0.8.28;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
+/**
+ * @title NFT Marketplace
+ * @author nazii.eth
+ * @notice A simple and secure marketplace for listing and buying ERC721 NFT.
+ * @dev Uses ReentrancyGuard to prevent reentrancy attacks.
+ */
 contract NFTMarketplace is ReentrancyGuard {
 
     struct Listing {
