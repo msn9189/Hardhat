@@ -24,11 +24,15 @@ contract NFTMarketplace is ReentrancyGuard {
      * @dev Mapping of NFT contract address => tokenId => Listing
      * Each NFT can have at most one active listing.
      */
-
     mapping(address => mapping(uint256 => Listing)) public listings;
 
+    /// @notice Emitted when an NFT is listed for sale
     event NFTListed(address indexed nftContract, uint256 indexed tokenId, address seller, uint256 price);
+
+    /// @notice Emitted when an NFT is purchased by the seller.
     event NFTBought(address indexed nftContract, uint256 indexed tokenId, address buyer, uint256 price);
+    
+    /// @notice Emitted when a listing is canceled by the seller.
     event NFTCancelled(address indexed nftContract, uint256 indexed tokenId, address seller);
 
     function listNFT(address nftContract, uint256 tokenId, uint256 price) external {
