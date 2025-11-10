@@ -6,4 +6,8 @@ import "@openzeppelin/contracts/utils/ReentrancyGaurd.sol";
 
 contract NFTMarketplace is ReentrancyGaurd {
     
+    struct Listing {
+        address seller;
+        uint256 price;
+    }
 }
