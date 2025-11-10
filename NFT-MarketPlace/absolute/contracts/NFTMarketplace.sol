@@ -12,10 +12,18 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
  */
 contract NFTMarketplace is ReentrancyGuard {
 
+    /**
+     * @dev Represents a listed NFT with seller and price information.
+     */
     struct Listing {
         address seller;
         uint256 price;
     }
+
+    /**
+     * @dev Mapping of NFT contract address => tokenId => Listing
+     * Each NFT can have at most one active listing.
+     */
 
     mapping(address => mapping(uint256 => Listing)) public listings;
 
