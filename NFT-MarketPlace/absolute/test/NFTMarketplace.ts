@@ -52,5 +52,27 @@ describe("NFTMarketplace", function () {
     expect(await nft.ownerOf(1)).to.equal(buyer.address);
   });
 
-  
+
+  it("Should cancel listing correctly", async function () {
+    const nft = await ethers.deployContract("MockNFT");
+    await nft.mint(seller.address, 1);
+
+    const marketplace = await ethers.deployContract("NFTMarketplace");
+
+    const marketplaceAddress = await marketplace.getAddress();
+    const nftAddress = await nft.getAddress();
+
+    await nft.approve(marketplaceAddress, 1);
+    await marketplace.listNFT(nftAddress, 1, ethers.parseEther("1"));
+
+    await expect(marketplace.cancelListing(nftAddress, 1))
+    .to.emit(marketplace, "NFTCancelled")
+    .withArgs(nftAddress, 1, seller.address);
+
+    const listing = await marketplace.listings(nftAddress, 1);
+    expect(listing.price).to.equal(0n);
+    expect(listing.seller).to.equal(
+      "0x0000000000000000000000000000000000000000"
+    );
+  });
 });
