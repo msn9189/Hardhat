@@ -3,6 +3,8 @@ import type { HardhatUserConfig } from "hardhat/config";
 import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
 import { configVariable } from "hardhat/config";
 
+const api = configVariable("ETHERSCAN_API_KEY");
+
 const config: HardhatUserConfig = {
   plugins: [hardhatToolboxMochaEthersPlugin],
   solidity: {
@@ -48,6 +50,11 @@ const config: HardhatUserConfig = {
       chainType: "op",
       url: configVariable("BASE_MAINNET_RPC_URL"),
       accounts: [configVariable("PRIVATE_KEY")],
+    },
+  },
+  verify: {
+    etherscan: {
+      apiKey: api,
     },
   },
 };
