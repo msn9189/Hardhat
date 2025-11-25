@@ -17,5 +17,8 @@
     "hardhat": "^3.0.10",
     "mocha": "^11.7.4",
     "typescript": "~5.8.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0"
   }
 }
