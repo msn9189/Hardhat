@@ -105,4 +105,13 @@ contract ERC1155 is IERC1155 {
         emit ApprovalForAll(msg.sender, operator, approved);
     }
 
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 value,
+        bytes calldata data) external {
+        
+    }
+
 }
