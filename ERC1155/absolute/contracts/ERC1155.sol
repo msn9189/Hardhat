@@ -79,4 +79,9 @@ contract ERC1155 is IERC1155 {
     );
 
     event URI(string value, uint256 indexed id);
+
+    // owner => id => balance
+    mapping(address => mapping(uint256 => uint256)) public balanceOf;
+    // owner => operator => approved
+    mapping(address => mapping(address => bool)) public isApprovedForAll;
 }
