@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { Contract } from "ethers/contract";
 import { network } from "hardhat";
 
 const { ethers } = await network.connect();
@@ -10,4 +11,11 @@ describe("ERC1155", function () {
   let addr1: any;
   let addr2: any;
   let addr3: any;
+
+  beforeEach(async function () {
+    [owner, addr1, addr2, addr3] = await ethers.getSigners();
+    ERC1155 = await ethers.getContractFactory("ERC1155");
+    erc1155 = await ERC1155.deploy("https://token-cdn-domain/{id}.json");
+    await erc1155.deployed();
+  })
 }) 
