@@ -216,9 +216,33 @@ contract ERC1155 is IERC1155 {
         uint256[] memory ids,
         uint256[] memory values,
         bytes memory data) internal {
-            
+            require(to != address(0), "to = 0 address");
+        require(ids.length == values.length, "ids length != values length");
+
+        for (uint256 i = 0; i < ids.length; i++) {
+            balanceOf[to][ids[i]] += values[i];
         }
+
+        emit TransferBatch(msg.sender, address(0), to, ids, values);
+
+        if (to.code.length > 0) {
+            require(
+                IERC1155TokenReceiver(to).onERC1155BatchReceived(
+                    msg.sender, address(0), ids, values, data
+                ) == IERC1155TokenReceiver.onERC1155BatchReceived.selector,
+                "unsafe transfer"
+            );
+        }
+    }
         
+    
+    function _burn(address from, uint256 id, uint256 value) internal {
+        require(from != address(0), "from = 0 address");
+        balanceOf[from][id] -= value;
+        emit TransferSingle(msg.sender, from, address(0), id, value);
+    }
+    
+     
 
 
 
