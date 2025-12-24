@@ -23,4 +23,14 @@ describe("ERC1155", function () {
     const returned = await erc1155.uri(1);
     expect(returned).to.equal("https://token-cdn-domain/{id}.json");
   });
+
+  it("owner can mint and balanceOf updates", async function () {
+    const id = 1;
+    const amount = 100;
+    // assume contract exposes mint(address,uint256,uint256,bytes)
+    await erc1155.connect(owner).mint(addr1.address, id, amount, "0x");
+    const bal = await erc1155.balanceOf(addr1.address, id);
+    expect(bal).to.equal(amount);
+  });
+
 }) 
