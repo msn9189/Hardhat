@@ -56,5 +56,11 @@ interface IERC1155TokenReceiver {
 }
 
 contract ERC1155 is IERC1155 {
-    // Implementation would go here
+    event TransferSingle(
+        address indexed operator,
+        address indexed from,
+        address indexed to,
+        uint256 id,
+        uint256 value
+    );
 }
