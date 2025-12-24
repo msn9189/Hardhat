@@ -71,4 +71,10 @@ contract ERC1155 is IERC1155 {
         uint256[] ids,
         uint256[] values
     );
+
+    event ApprovalForAll(
+        address indexed owner,
+        address indexed operator,
+        bool approved
+    );
 }
