@@ -36,3 +36,7 @@ interface IERC1155 {
         returns (bool);
   
 }
+
+interface IERC1155TokenReceiver {
+    
+}
