@@ -196,6 +196,18 @@ contract ERC1155 is IERC1155 {
 
     function _mint(address to, uint256 id, uint256 value, bytes memory data)
         internal {
-            
+        require(to != address(0), "INVALID_RECIPIENT"); 
+        balanceOf[to][id] += value;
+
+        emit TransferSingle(msg.sender, address(0), to, id, value);
+
+        if (to.code.length > 0) {
+            require(
+                IERC1155TokenReceiver(to).onERC1155Received(
+                    msg.sender, address(0), id, value, data
+                ) == IERC1155TokenReceiver.onERC1155Received.selector,
+                "unsafe transfer"
+            );
+        }
         }
 }
