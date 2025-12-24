@@ -29,5 +29,10 @@ interface IERC1155 {
         returns (uint256[] memory);
 
   function setApprovalForAll(address operator, bool approved) external;
+
+  function isApprovedForAll(address owner, address operator)
+        external
+        view
+        returns (bool);
   
 }
