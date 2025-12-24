@@ -77,4 +77,6 @@ contract ERC1155 is IERC1155 {
         address indexed operator,
         bool approved
     );
+
+    event URI(string value, uint256 indexed id);
 }
