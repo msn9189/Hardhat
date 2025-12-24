@@ -260,7 +260,9 @@ contract ERC1155 is IERC1155 {
 }
 
 contract MyMultiToken is ERC1155{
-    
+    function mint(uint256 id, uint256 value, bytes memory data) external {
+        _mint(msg.sender, id, value, data);
+    }
 }
 
 
