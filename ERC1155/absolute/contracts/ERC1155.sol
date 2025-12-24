@@ -209,5 +209,17 @@ contract ERC1155 is IERC1155 {
                 "unsafe transfer"
             );
         }
+    }
+
+    function _mintBatch(
+        address to,
+        uint256[] memory ids,
+        uint256[] memory values,
+        bytes memory data) internal {
+            
         }
+        
+
+
+
 }
