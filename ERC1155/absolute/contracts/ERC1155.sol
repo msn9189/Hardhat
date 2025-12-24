@@ -38,5 +38,13 @@ interface IERC1155 {
 }
 
 interface IERC1155TokenReceiver {
+    function onERC1155Received(
+        address operator,
+        address from,
+        uint256 id,
+        uint256 value,
+        bytes calldata data
+    ) external returns (bytes4);
+
     
 }
