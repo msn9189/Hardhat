@@ -267,9 +267,12 @@ contract MyMultiToken is ERC1155{
     function batchMint(
         uint256[] calldata ids,
         uint256[] calldata values,
-        bytes calldata data
-    ) external {
+        bytes calldata data) external {
         _mintBatch(msg.sender, ids, values, data);
+    }
+
+    function burn(uint256 id, uint256 value) external {
+        _burn(msg.sender, id, value);
     }
 }
 
