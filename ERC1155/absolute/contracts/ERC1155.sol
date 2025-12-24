@@ -88,8 +88,7 @@ contract ERC1155 is IERC1155 {
     function balanceOfBatch(address[] calldata owners, uint256[] calldata ids)
         external
         view
-        returns (uint256[] memory balances)
-    {
+        returns (uint256[] memory balances){
         require(owners.length == ids.length, "owners length != ids length");
 
         balances = new uint256[](owners.length);
@@ -99,6 +98,11 @@ contract ERC1155 is IERC1155 {
                 balances[i] = balanceOf[owners[i]][ids[i]];
             }
         }
+    }
+
+    function setApprovalForAll(address operator, bool approved) external {
+        isApprovedForAll[msg.sender][operator] = approved;
+        emit ApprovalForAll(msg.sender, operator, approved);
     }
 
 }
