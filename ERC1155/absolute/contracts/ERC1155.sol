@@ -259,7 +259,8 @@ contract ERC1155 is IERC1155 {
 
 }
 
-
-
+contract MyMultiToken is ERC1155{
+    
+}
 
 
