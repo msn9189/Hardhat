@@ -54,3 +54,7 @@ interface IERC1155TokenReceiver {
         bytes calldata data
     ) external returns (bytes4);
 }
+
+contract ERC1155 is IERC1155 {
+    // Implementation would go here
+}
