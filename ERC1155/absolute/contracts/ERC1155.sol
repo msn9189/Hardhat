@@ -9,7 +9,7 @@ interface IERC1155 {
         uint256 value,
         bytes calldata data
     ) external;
-    
+
   function safeBatchTransferFrom(
         address from,
         address to,
@@ -18,4 +18,8 @@ interface IERC1155 {
         bytes calldata data
     ) external;
 
+  function balanceOf(address owner, uint256 id)
+        external
+        view
+        returns (uint256);
 }
