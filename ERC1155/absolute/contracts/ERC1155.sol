@@ -146,8 +146,7 @@ contract ERC1155 is IERC1155 {
         address to,
         uint256[] calldata ids,
         uint256[] calldata values,
-        bytes calldata data
-    ) external {
+        bytes calldata data) external {
         require(
             msg.sender == from || isApprovedForAll[from][msg.sender],
             "NOT_AUTHORIZED"
@@ -180,6 +179,17 @@ contract ERC1155 is IERC1155 {
                 "UNSAFE_RECIPIENT"
             );
         }
+    }
+
+    // ERC165
+    function supportsInterface(bytes4 interfaceId)
+        external
+        pure
+        returns (bool)
+    {
+        return interfaceId == 0x01ffc9a7 // ERC165 Interface ID for ERC165
+            || interfaceId == 0xd9b67a26 // ERC165 Interface ID for ERC1155
+            || interfaceId == 0x0e89341c; // ERC165 Interface ID for ERC1155MetadataURI
     }
 
 }
