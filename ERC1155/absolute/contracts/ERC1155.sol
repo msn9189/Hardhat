@@ -22,4 +22,11 @@ interface IERC1155 {
         external
         view
         returns (uint256);
+
+  function balanceOfBatch(address[] calldata owners, uint256[] calldata ids)
+        external
+        view
+        returns (uint256[] memory);
+
+  
 }
