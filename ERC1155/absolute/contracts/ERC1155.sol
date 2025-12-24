@@ -241,9 +241,21 @@ contract ERC1155 is IERC1155 {
         balanceOf[from][id] -= value;
         emit TransferSingle(msg.sender, from, address(0), id, value);
     }
-    
-     
 
+    function _batchBurn(
+        address from,
+        uint256[] calldata ids,
+        uint256[] calldata values) internal {
+            require(from != address(0), "from = 0 address");
+            require(ids.length == values.length, "ids length != values length");
 
+            for (uint256 i = 0; i < ids.length; i++) {
+                balanceOf[from][ids[i]] -= values[i];
+            }
 
+            emit TransferBatch(msg.sender, from, address(0), ids, values);
+    }
 }
+
+
+
