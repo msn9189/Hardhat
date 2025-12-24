@@ -17,5 +17,10 @@ describe("ERC1155", function () {
     ERC1155 = await ethers.getContractFactory("ERC1155");
     erc1155 = await ERC1155.deploy("https://token-cdn-domain/{id}.json");
     await erc1155.deployed();
-  })
+  });
+
+  it("deploys the contract successfully", async function(){
+    const returned = await erc1155.uri(1);
+    expect(returned).to.equal("https://token-cdn-domain/{id}.json");
+  });
 }) 
