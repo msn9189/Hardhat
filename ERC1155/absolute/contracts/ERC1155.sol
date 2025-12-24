@@ -28,5 +28,6 @@ interface IERC1155 {
         view
         returns (uint256[] memory);
 
+  function setApprovalForAll(address operator, bool approved) external;
   
 }
