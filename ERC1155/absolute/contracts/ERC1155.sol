@@ -147,6 +147,39 @@ contract ERC1155 is IERC1155 {
         uint256[] calldata ids,
         uint256[] calldata values,
         bytes calldata data
-    ) external {}
+    ) external {
+        require(
+            msg.sender == from || isApprovedForAll[from][msg.sender],
+            "NOT_AUTHORIZED"
+        );
+        require(to != address(0), "INVALID_RECIPIENT");
+        require(ids.length == values.length, "ids length != values length");
+
+        unchecked {
+            for (uint256 i = 0; i < ids.length; i++) {
+                uint256 id = ids[i];
+                uint256 value = values[i];
+
+                balanceOf[from][id] -= value;
+                balanceOf[to][id] += value;
+            }
+        }
+
+        emit TransferBatch(msg.sender, from, to, ids, values);
+
+        if (to.code.length != 0) {
+            require(
+                IERC1155TokenReceiver(to).onERC1155BatchReceived(
+                    msg.sender,
+                    from,
+                    ids,
+                    values,
+                    data
+                ) ==
+                    IERC1155TokenReceiver.onERC1155BatchReceived.selector,
+                "UNSAFE_RECIPIENT"
+            );
+        }
+    }
 
 }
