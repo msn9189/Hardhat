@@ -194,4 +194,8 @@ contract ERC1155 is IERC1155 {
     // ERC1155 Metadata URI
     function uri(uint256 id) public view virtual returns (string memory) {}
 
+    function _mint(address to, uint256 id, uint256 value, bytes memory data)
+        internal {
+            
+        }
 }
