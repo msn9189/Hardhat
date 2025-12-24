@@ -84,4 +84,21 @@ contract ERC1155 is IERC1155 {
     mapping(address => mapping(uint256 => uint256)) public balanceOf;
     // owner => operator => approved
     mapping(address => mapping(address => bool)) public isApprovedForAll;
+
+    function balanceOfBatch(address[] calldata owners, uint256[] calldata ids)
+        external
+        view
+        returns (uint256[] memory balances)
+    {
+        require(owners.length == ids.length, "owners length != ids length");
+
+        balances = new uint256[](owners.length);
+
+        unchecked {
+            for (uint256 i = 0; i < owners.length; i++) {
+                balances[i] = balanceOf[owners[i]][ids[i]];
+            }
+        }
+    }
+
 }
