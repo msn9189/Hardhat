@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
 contract SimpleVault {
@@ -11,10 +11,10 @@ contract SimpleVault {
   function withdraw(uint256 amount) public {
     require(balances[msg.sender] >= amount, "Insufficient balance");
     balances[msg.sender] -= amount;
-    payable(msg.sender).transfer(amount)
+    payable(msg.sender).transfer(amount);
   }
 
-  function getBalance(address account) public view returns (uint256) {
-    return balances[account];
+  function getBalance() public view returns (uint256) {
+    return balances[msg.sender];
   }
 }
