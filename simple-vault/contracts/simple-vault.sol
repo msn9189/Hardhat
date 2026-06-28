@@ -14,5 +14,7 @@ contract SimpleVault {
     payable(msg.sender).transfer(amount)
   }
 
-  
+  function getBalance(address account) public view returns (uint256) {
+    return balances[account];
+  }
 }
