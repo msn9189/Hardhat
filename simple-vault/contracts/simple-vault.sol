@@ -4,8 +4,8 @@ pragma solidity ^0.8.28;
 contract SimpleVault {
   mapping(address => uint256) public balances;
 
-  function deposit(uint256 amount) public {
-    balances[msg.sender] += amount;
+  function deposit() public payable {
+    balances[msg.sender] += msg.value;
   }
 
   function withdraw(uint256 amount) public {
