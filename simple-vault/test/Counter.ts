@@ -3,34 +3,18 @@ import { network } from "hardhat";
 
 const { ethers } = await network.create();
 
-describe("Counter", function () {
-  it("Should emit the Increment event when calling the inc() function", async function () {
-    const counter = await ethers.deployContract("Counter");
+describe("SimpleVault", function () {
+  it("Should depostit ETH in contract when calling deposit function", async function () {
+    const simpelVault = await ethers.deployContract("SimpleVault");
+    const [user1, user2] = await ethers.getSigners();
+    await simpelVault.connect(user1).deposit({ value: ethers.parseEther("1")});
+    await simpelVault.connect(user2).deposit({ value: ethers.parseEther("2")});
 
-    await expect(counter.inc()).to.emit(counter, "Increment").withArgs(1n);
+    const balance1 = await simpelVault.connect(user1).getBalance();
+    const balance2 = await simpelVault.connect(user2).getBalance();
+
+    expect(balance1).to.equal(ethers.parseEther("1"));
+    expect(balance2).to.equal(ethers.parseEther("2"));
   });
 
-  it("The sum of the Increment events should match the current value", async function () {
-    const counter = await ethers.deployContract("Counter");
-    const deploymentBlockNumber = await ethers.provider.getBlockNumber();
-
-    // run a series of increments
-    for (let i = 1; i <= 10; i++) {
-      await counter.incBy(i);
-    }
-
-    const events = await counter.queryFilter(
-      counter.filters.Increment(),
-      deploymentBlockNumber,
-      "latest",
-    );
-
-    // check that the aggregated events match the current value
-    let total = 0n;
-    for (const event of events) {
-      total += event.args.by;
-    }
-
-    expect(await counter.x()).to.equal(total);
-  });
 });
