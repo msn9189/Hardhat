@@ -11,7 +11,8 @@ contract SimpleVault {
   function withdraw(uint256 amount) public {
     require(balances[msg.sender] >= amount, "Insufficient balance");
     balances[msg.sender] -= amount;
-    payable(msg.sender).transfer(amount);
+    (bool success, ) = payable(msg.sender).call{value: amount}("");
+    require(success, "Transfer failed");
   }
 
   function getBalance() public view returns (uint256) {
