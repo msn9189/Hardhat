@@ -16,5 +16,13 @@ describe("SimpleVault", function () {
     expect(balance1).to.equal(ethers.parseEther("1"));
     expect(balance2).to.equal(ethers.parseEther("2"));
   });
+  it("Should withdraw ETH from contract when calling withdraw function", async function () {
+    const simpleVault = await ethers.deployContract("SimpleVault")
+    const [user1] = await ethers.getSigners()
+    await simpleVault.connect(user1).deposit({ value: ethers.parseEther("2")});
+    await simpleVault.connect(user1).withdraw(ethers.parseEther("1"));
+    const balance = await simpleVault.connect(user1).getBalance();
+    expect(balance).to.equal(ethers.parseEther("1"))
+  });
 
 });
